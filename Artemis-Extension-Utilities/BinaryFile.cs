@@ -37,5 +37,32 @@ namespace Artemis.Extension.Utilities
             using FileStream fs = target.OpenRead();
             fs.Read(Bytes, 0, Bytes.Length);
         }
+        /// <summary>
+        /// Sets the target and the bytes of the binary file.
+        /// </summary>
+        /// <param name="target">The target file.</param>
+        /// <param name="bytes">The binary bytes.</param>
+        public BinaryFile(FileInfo target, byte[] bytes)
+        {
+            Target = target;
+            Bytes = bytes;
+        }
+
+        /// <summary>
+        /// Saves the bytes in <see cref="Bytes"/> to the target.
+        /// </summary>
+        /// <remarks>If the target file already exists, it will be overwritten.</remarks>
+        /// <exception cref="IOException"></exception>
+        /// <exception cref="System.Security.SecurityException"></exception>
+        /// <exception cref="UnauthorizedAccessException"></exception>
+        /// <exception cref="DirectoryNotFoundException"></exception>
+        public void SaveToTarget()
+        {
+            if (Target.Exists)
+                Target.Delete();
+
+            using FileStream fs = Target.OpenWrite();
+            fs.Write(Bytes, 0, Bytes.Length);
+        }
     }
 }

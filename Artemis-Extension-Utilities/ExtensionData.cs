@@ -137,25 +137,5 @@ namespace Artemis.Extension.Utilities
                 return bytes;
             }
         }
-
-        /// <summary>
-        /// Writes a byte representation of the current struct instance to a target file.
-        /// </summary>
-        /// <param name="file">The target file to write to.</param>
-        /// <remarks>If the target file already exists, it will be overwritten.</remarks>
-        /// <exception cref="IOException"></exception>
-        /// <exception cref="System.Security.SecurityException"></exception>
-        /// <exception cref="UnauthorizedAccessException"></exception>
-        /// <exception cref="DirectoryNotFoundException"></exception>
-        public readonly void WriteToFile(FileInfo file)
-        {
-            if (file.Exists)
-                file.Delete();
-
-            using FileStream fs = file.OpenWrite();
-
-            byte[] bytes = Bytes;
-            fs.Write(bytes, 0, bytes.Length);
-        }
     }
 }
