@@ -29,7 +29,7 @@ namespace Artemis.Extension.Utilities
     /// A file storing a public or private RSA key instance.
     /// </summary>
     /// <param name="target">The RSA key file information.</param>
-    public class KeyFile(FileInfo target)
+    public class KeyFile(FileInfo target) : FileBase(target)
     {
         /// <summary>
         /// The default file extension for a public RSA key file.
@@ -39,11 +39,6 @@ namespace Artemis.Extension.Utilities
         /// The default file extension for a private RSA key file.
         /// </summary>
         public static readonly string PrivateKeyExtension = ".akyx";
-
-        /// <summary>
-        /// The RSA key file information.
-        /// </summary>
-        public FileInfo Target { get; } = target;
 
         /// <summary>
         /// Loads a key from the target.

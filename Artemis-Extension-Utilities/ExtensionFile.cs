@@ -1,10 +1,26 @@
 ﻿namespace Artemis.Extension.Utilities
 {
-    public class ExtensionFile
+    /// <summary>
+    /// File containing a packed Artemis Extension.
+    /// </summary>
+    public class ExtensionFile : FileBase
     {
-        public FileInfo Target { get; }
+        /// <summary>
+        /// The file extension for extension files.
+        /// </summary>
+        public static readonly string FileExtension = ".aext";
+
+        /// <summary>
+        /// The information section of the extension file.
+        /// </summary>
         public InformationFile? Information { get; set; }
+        /// <summary>
+        /// The binary section of the extension file.
+        /// </summary>
         public BinaryFile? Binary { get; set; }
+        /// <summary>
+        /// Whether the information sectión contains a signature of the binary or not.
+        /// </summary>
         public bool IsSigned
         {
             get
@@ -15,14 +31,20 @@
             }
         }
 
-        public ExtensionFile(FileInfo target)
-        {
-            Target = target;
-        }
+        /// <summary>
+        /// Sets the target extension file.
+        /// </summary>
+        /// <param name="target">The target extension file.</param>
+        public ExtensionFile(FileInfo target) : base(target) { }
 
-        public ExtensionFile(FileInfo target, InformationFile information, BinaryFile binary)
+        /// <summary>
+        /// Sets the target information file as well as the information and binary sections of it.
+        /// </summary>
+        /// <param name="target">The target extension file.</param>
+        /// <param name="information">The information section.</param>
+        /// <param name="binary">The binary section.</param>
+        public ExtensionFile(FileInfo target, InformationFile information, BinaryFile binary) : base(target)
         {
-            Target = target;
             Information = information;
             Binary = binary;
         }

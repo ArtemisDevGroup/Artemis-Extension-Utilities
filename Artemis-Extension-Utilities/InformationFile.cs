@@ -5,13 +5,8 @@ namespace Artemis.Extension.Utilities
     /// <summary>
     /// The base class of a file containing the information section of an Artemis extension.
     /// </summary>
-    public class InformationFile
+    public class InformationFile : FileBase
     {
-        /// <summary>
-        /// The target information file.
-        /// </summary>
-        public FileInfo Target { get; }
-
         protected ExtensionData _data;
         /// <summary>
         /// The extension data.
@@ -22,21 +17,13 @@ namespace Artemis.Extension.Utilities
         /// Sets the target information file location.
         /// </summary>
         /// <param name="target">The target file information.</param>
-        public InformationFile(FileInfo target)
-        {
-            Target = target;
-            Data = new();
-        }
+        public InformationFile(FileInfo target) : base(target) => Data = new();
         /// <summary>
         /// Sets the target information file location and data.
         /// </summary>
         /// <param name="target">The target file information.</param>
         /// <param name="data">The extension data.</param>
-        public InformationFile(FileInfo target, ExtensionData data)
-        {
-            Target = target;
-            Data = data;
-        }
+        public InformationFile(FileInfo target, ExtensionData data) : base(target) => Data = data;
 
         /// <summary>
         /// Saves the current data to the target.

@@ -6,13 +6,8 @@ namespace Artemis.Extension.Utilities
     /// <summary>
     /// A class for accessing the data of a binary file.
     /// </summary>
-    public class BinaryFile
+    public class BinaryFile : FileBase
     {
-        /// <summary>
-        /// The binary file info.
-        /// </summary>
-        public FileInfo Target { get; }
-
         /// <summary>
         /// All bytes in the binary file.
         /// </summary>
@@ -26,12 +21,11 @@ namespace Artemis.Extension.Utilities
         /// <exception cref="UnauthorizedAccessException">Inherited from <see cref="FileInfo.OpenRead()"/>.</exception>
         /// <exception cref="DirectoryNotFoundException">Inherited from <see cref="FileInfo.OpenRead()"/>.</exception>
         /// <exception cref="IOException">Inherited from <see cref="FileInfo.OpenRead()"/>.</exception>
-        public BinaryFile(FileInfo target)
+        public BinaryFile(FileInfo target) : base(target)
         {
             if (!target.Exists)
                 throw new FileNotFoundException("Binary file does not exist.", target.FullName);
 
-            Target = target;
             Bytes = new byte[target.Length];
 
             using FileStream fs = target.OpenRead();
@@ -42,11 +36,7 @@ namespace Artemis.Extension.Utilities
         /// </summary>
         /// <param name="target">The target file.</param>
         /// <param name="bytes">The binary bytes.</param>
-        public BinaryFile(FileInfo target, byte[] bytes)
-        {
-            Target = target;
-            Bytes = bytes;
-        }
+        public BinaryFile(FileInfo target, byte[] bytes) : base(target) => Bytes = bytes;
 
         /// <summary>
         /// Saves the bytes in <see cref="Bytes"/> to the target.
