@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-namespace Artemis.Extension.Utilities
+﻿namespace Artemis.Extension.Utilities
 {
     /// <summary>
     /// A class for accessing the data of a binary file.
